@@ -1,0 +1,38 @@
+import requests
+from bs4 import BeautifulSoup
+
+def get_listing_info(listing_url):
+    # Use requests library to fetch the listing page
+    response = requests.get(listing_url)
+
+    # Parse the HTML content of the page using BeautifulSoup
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # Extract the relevant information about the listing
+    # such as price, number of bedrooms, number of bathrooms, etc.
+    # and return it as a dictionary
+    listing_info = {}
+    # ...
+    return listing_info
+
+# Define a dictionary that maps the name of each vacation rental website
+# to the URL of the listing on that website
+listing_urls = {
+    "airbnb": "https://www.airbnb.com/rooms/123456",
+    "vrbo": "https://www.vrbo.com/123456",
+    # etc.
+}
+
+# Use the get_listing_info() function to fetch the information
+# about the listing on each website
+listing_info = {}
+for website, url in listing_urls.items():
+    listing_info[website] = get_listing_info(url)
+
+# Print the listing information for each website
+for website, info in listing_info.items():
+    print(f"{website}:")
+    print(f"  Price: ${info['price']}")
+    print(f"  Bedrooms: {info['bedrooms']}")
+    print(f"  Bathrooms: {info['bathrooms']}")
+    # etc.
